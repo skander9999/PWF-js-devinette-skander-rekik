@@ -1,15 +1,53 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu de Devinette</title>
+    <title>Document</title>
 </head>
+
 <body>
-    <h1>Jeu de Devinette</h1>
-    <p>Ouvrez la console de votre navigateur (F12) pour voir les messages si nécessaire</p>
-    
-    <!-- Lier le fichier JavaScript -->
-    <script src="script.js"></script>
+    <script>
+    let min = 1; // Limite inférieure
+    let max = 100; // Limite supérieure
+
+    // Message de bienvenue
+    alert(`Bienvenue au jeu du nombre mystère !\n\nRègles du jeu : 
+    - Devinez un nombre compris entre ${min} et ${max}.
+    - Vous recevrez des indices : "C'est plus !" ou "C'est moins !".
+    - Vous pouvez quitter à tout moment en annulant l'invite.\n\nBonne chance !`);
+
+    const nombreMystere = Math.floor(Math.random() * (max - min + 1)) + min; // Nombre entre min et max
+    let tentative = 0;
+    let deviner = false;
+
+    while (!deviner) {
+        const reponse = prompt(`Devinez un nombre entre ${min} et ${max} :`);
+        tentative++;
+
+        if (reponse === null) {
+            alert("Jeu annulé. Merci d'avoir joué !");
+            break;
+        }
+
+        const nombre = parseInt(reponse, 10);
+
+        if (isNaN(nombre)) {
+            alert("Ce n'est pas un nombre valide. Veuillez réessayer !");
+        } else if (nombre < min || nombre > max) {
+            alert(`Le nombre doit être compris entre ${min} et ${max}.`);
+        } else if (nombre < nombreMystere) {
+            alert("C'est plus !");
+        } else if (nombre > nombreMystere) {
+            alert("C'est moins !");
+        } else {
+            alert(`Félicitations ! Vous avez trouvé le nombre ${nombreMystere} en ${tentative} tentative(s).`);
+            deviner = true;
+        }
+    }
+
+    </script>
 </body>
+
 </html>
